@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button, Dropdown, Menu } from "antd";
 import { FullPageLoading, Row } from "components/lib";
-import { Routes, Route, Navigate } from "react-router";
+import { Routes, Route } from "react-router";
 import { ProjectScreen } from "screen/screen";
 import { useAuth } from "context/auth-context";
 import ProjectList from "screen/project-list";
@@ -12,7 +12,7 @@ import ProjectsModal from "screen/project-list/projects-modal";
 import { ProjectsPopover } from "components/projects-popover";
 
 export const AuthentIcateApp = () => {
-  const [openProjectModal, setOpenProjectMOdal] = useState(false);
+  // const [openProjectModal, setOpenProjectMOdal] = useState(false);
   const { logout, user } = useAuth();
 
 
@@ -47,7 +47,7 @@ export const AuthentIcateApp = () => {
       <Header between={true}>
         <HeaderLeft gap={true}>
           <h2>JiraSoftWare</h2>
-          <ProjectsPopover setOpenProjectMOdal={setOpenProjectMOdal} />
+          <ProjectsPopover />
           <h2>用户</h2>
         </HeaderLeft>
         <HeaderRight>
@@ -66,14 +66,14 @@ export const AuthentIcateApp = () => {
         <Main>
           <Router>
             <Routes>
-              <Route path="/projects" element={<ProjectList setOpenProjectMOdal={setOpenProjectMOdal} />} />
+              <Route path="/projects" element={<ProjectList />} />
               <Route path="/projects/:projectId/*" element={<ProjectScreen />} />
             </Routes>
             {/* 不知为何 Navigate 不能放于  Routes 内部，也不能放于 Router 外部 */}
             {/* <Navigate to={'/projects'} /> */}
           </Router>
         </Main>
-        <ProjectsModal openProjectModal={openProjectModal} onClose={() => setOpenProjectMOdal(false)} />
+        <ProjectsModal />
       </Container>
     );
   };

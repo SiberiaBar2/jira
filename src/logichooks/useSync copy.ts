@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 import { useMountRef } from "./useMountRef";
 
+
+// useSycn useState 实现
 interface State<D> {
     error: Error | null
     data: D | null

@@ -6,12 +6,8 @@ import { http } from "utils/http";
 import { useMount } from "hooks";
 import useSync from "logichooks/useSync";
 import { FullPageErrorFallback, FullPageLoading } from "components/lib";
-import { useDispatch, useSelector } from "react-redux";
-import * as authStore from './auth.slice';
-import { AppDispatch } from "store";
-import {bootstrap} from "./auth.slice";
 
-export interface AuthForm {
+interface AuthForm {
   username: string;
   password: string;
 }
@@ -27,12 +23,27 @@ export const bootStrapUser = async () => {
   return user;
 };
 
+const AuthContext = React.createContext<
+  | {
+      user: User | null;
+      login: (form: AuthForm) => Promise<void>;
+      register: (form: AuthForm) => Promise<void>;
+      logout: () => Promise<void>;
+    }
+  | undefined
+>(undefined);
+
+AuthContext.displayName = "AuthContext";
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const dispatch: (...args: unknown[]) => Promise<User>  = useDispatch<any>();
-  const {error, isIdle, isError, isLoading, run} = useSync<User | null>();
+  const {data: user, error, isIdle, isError, isLoading, run, setData: setUser} = useSync<User | null>();
+
+  const login = (form: AuthForm) => auth.login(form).then(setUser); // ?? 为什么能这么写
+  const register = (form: AuthForm) => auth.register(form).then(setUser);
+  const logout = () => auth.logout().then(() => setUser(null));
 
   useMount(() => {
-    run(dispatch(bootstrap()));
+    run(bootStrapUser());
   });
 
   // 如果未运行或运行中 显示 loading 页面
@@ -47,21 +58,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <>{children}</>
+    <AuthContext.Provider
+      children={children}
+      value={{ user, login, register, logout }}
+    />
   );
 };
 
 export const useAuth = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const user = useSelector(authStore.selectUser);
-  const login = (form: AuthForm) => dispatch(authStore.login(form));
-  const register = (form: AuthForm) => dispatch(authStore.register(form));
-  const logout = () => dispatch(authStore.logout());
-
-  return {
-    user,
-    login,
-    register,
-    logout,
-  };
+  const context = React.useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth必须在auth-provider中使用");
+  }
+  return context;
 };

@@ -3,7 +3,9 @@ import { ButtonNoPadding } from "components/lib";
 import Pin from "components/pin";
 import dayjs from "dayjs";
 import { useEditProject } from "logichooks/useEditProject";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { projectListActions } from "./projects-list.slice";
 import { User } from "./search-panel";
 
 export interface Project {
@@ -18,10 +20,11 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   users: User[];
   refresh?: () => void;
-  setOpenProjectMOdal: (value: boolean) => void
 }
 const List = ({ users, ...props }: ListProps) => {
   const {mutate} = useEditProject();
+  const dispatch = useDispatch();
+
   const pinProject = (id: number) => (pin: boolean) => mutate({id, pin}).then(props.refresh); // 柯里化 refresh : 刷新列表
   return (
     <Table
@@ -70,7 +73,7 @@ const List = ({ users, ...props }: ListProps) => {
           render: (value, project) => {
             return (
               <Dropdown overlay={<Menu>
-                <Menu.Item onClick={() => props.setOpenProjectMOdal(true)}>编辑</Menu.Item>
+                <Menu.Item onClick={() => dispatch(projectListActions.openProjectModal())}>编辑</Menu.Item>
               </Menu>}>
                 <ButtonNoPadding type="link">...</ButtonNoPadding>
               </Dropdown>

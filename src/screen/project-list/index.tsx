@@ -16,10 +16,11 @@ import { useQueryParam } from "logichooks/useQueryParam";
 import { useProjectSearchParam } from "./utils";
 import useSync from "logichooks/useSync";
 import { Row } from "components/lib";
+import { useDispatch } from "react-redux";
+import { projectListActions } from "./projects-list.slice";
 
-const ProjectList = (props: {
-  setOpenProjectMOdal: (value: boolean) => void;
-}) => {
+const ProjectList = () => {
+  const dispatch = useDispatch();
   // const [users, setUsers] = useState([]);
   // const {retry} = useSync();
 
@@ -54,7 +55,7 @@ const ProjectList = (props: {
     <Conteainer>
       <Row between={true}>
         <h1>项目列表</h1>
-        <Button onClick={() => props.setOpenProjectMOdal(true)}>
+        <Button onClick={() => dispatch(projectListActions.openProjectModal())}>
           创建项目
         </Button>
       </Row>
@@ -67,7 +68,6 @@ const ProjectList = (props: {
         loading={isLoading}
         users={users || []}
         dataSource={list || []}
-        setOpenProjectMOdal={props.setOpenProjectMOdal}
       />
     </Conteainer>
   );
