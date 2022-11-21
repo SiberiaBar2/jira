@@ -1,16 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './wdyr'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+// 项目专属工具
+import { loadServer, DevTools } from "jira-dev-tool";
+
+// 必须在 jira-dev-tool 后面引入
+import 'antd/dist/antd.less';
+import { AppProviders } from "context";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+
+loadServer(() =>
+  root.render(
+    <React.StrictMode>
+      <AppProviders>
+        <DevTools />
+        <App />
+      </AppProviders>
+    </React.StrictMode>
+  )
 );
 
 // If you want to start measuring performance in your app, pass a function
