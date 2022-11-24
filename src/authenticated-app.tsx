@@ -1,27 +1,16 @@
 import styled from "@emotion/styled";
 import {Button, Dropdown, Menu} from "antd";
-import {FullPageLoading, Row} from "components/lib";
+import {Row} from "components/lib";
 import {Routes, Route, Navigate} from "react-router";
 import {ProjectScreen} from "screen/screen";
 import {useAuth} from "context/auth-context";
 import ProjectList from "screen/project-list";
 import {BrowserRouter as Router} from "react-router-dom";
-import {useMount} from "hooks";
-import {useState} from "react";
 import ProjectsModal from "screen/project-list/projects-modal";
 import {ProjectsPopover} from "components/projects-popover";
 
 export const AuthentIcateApp = () => {
-    // const [openProjectModal, setOpenProjectMOdal] = useState(false);
     const {logout, user} = useAuth();
-
-
-    useMount(() => {
-        if (!window.location.pathname.includes("projects")) {
-            window.location.pathname += "projects";
-        }
-    });
-
     const renderUser = () => {
         return (
             <Dropdown
@@ -57,35 +46,22 @@ export const AuthentIcateApp = () => {
         );
     };
 
-    const renderBodyContent = () => {
-        return (
-            <Container>
-                <Router>
-                    {/* {value.notExact} */}
-                    {renderPageHeader()}
-                    {/* <Button onClick={() => setOpenProjectMOdal(true)}>dianji</Button> */}
-                    <Main>
-                        <Routes>
-                            <Route path="/projects" element={<ProjectList />}/>
-                            <Route path="/projects/:projectId/*" element={<ProjectScreen/>}/>
-                        </Routes>
-                        {/* 不知为何 Navigate 不能放于  Routes 内部，也不能放于 Router 外部 */}
-                        {/* <Navigate to={'/projects'} /> */}
-                    </Main>
-                    <ProjectsModal />
-                </Router>
-            </Container>
-        );
-    };
-
-    const renderWrapContent = () => {
-        return window.location.pathname.includes('projects') ? renderBodyContent() : <FullPageLoading/>;
-    };
-
-    // const value: any = undefined;
-    return <>
-        {renderWrapContent()}
-    </>;
+    return (
+        <Container>
+            <Router>
+                {renderPageHeader()}
+                <Main>
+                    <Routes>
+                        <Route path="/projects" element={<ProjectList />}/>
+                        <Route path="/projects/:projectId/*" element={<ProjectScreen/>}/>
+                        {/* 这里不加 replace 会无法回退！*/}
+                        <Route path="*" element={<Navigate to={'/projects '} replace />} />
+                    </Routes>
+                </Main>
+                <ProjectsModal />
+            </Router>
+        </Container>
+    );
 };
 
 const Container = styled.div`
@@ -102,4 +78,6 @@ const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.div``;
 const Main = styled.main`
   height: calc(100vh - 6rem);
+  display: flex;
+  overflow: hidden;
 `;

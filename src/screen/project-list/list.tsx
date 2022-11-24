@@ -4,26 +4,29 @@ import Pin from "components/pin";
 import dayjs from "dayjs";
 import { useEditProject } from "logichooks/useEditProject";
 import { Link } from "react-router-dom";
+import { Project } from "types/project";
 import { User } from "./search-panel";
 import {useProjectModal} from "./utils";
 
-export interface Project {
-  id: number;
-  name: string;
-  personId: number;
-  pin: boolean;
-  organization: string;
-  created: number;
-}
+// export interface Project {
+//   id: number;
+//   name: string;
+//   personId: number;
+//   pin: boolean;
+//   organization: string;
+//   created: number;
+// }
 
 interface ListProps extends TableProps<Project> {
   users: User[];
-  refresh?: () => void;
 }
 const List = ({ users, ...props }: ListProps) => {
   const {mutate} = useEditProject();
-  const {open} = useProjectModal();
-  const pinProject = (id: number) => (pin: boolean) => mutate({id, pin}).then(props.refresh); // 柯里化 refresh : 刷新列表
+  const {startEdit} = useProjectModal();
+
+  const pinProject = (id: number) => (pin: boolean) => mutate({id, pin}); // 柯里化 refresh : 刷新列表
+  const editProject = (id: number) => () => startEdit(id);
+
   return (
     <Table
       pagination={false}
@@ -70,8 +73,9 @@ const List = ({ users, ...props }: ListProps) => {
         {
           render: (value, project) => {
             return (
-              <Dropdown overlay={<Menu>
-                <Menu.Item onClick={() => open()}>编辑</Menu.Item>
+              <Dropdown overlay={<Menu> 
+                <Menu.Item key={'edit'} onClick={editProject(project.id)}>编辑</Menu.Item>
+                <Menu.Item key={'delete'}>删除</Menu.Item>
               </Menu>}>
                 <ButtonNoPadding type="link">...</ButtonNoPadding>
               </Dropdown>
@@ -83,4 +87,5 @@ const List = ({ users, ...props }: ListProps) => {
     />
   );
 };
+
 export default List;

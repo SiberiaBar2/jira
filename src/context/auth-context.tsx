@@ -6,6 +6,7 @@ import { http } from "utils/http";
 import { useMount } from "hooks";
 import useSync from "logichooks/useSync";
 import { FullPageErrorFallback, FullPageLoading } from "components/lib";
+import { useQueryClient } from "react-query";
 
 interface AuthForm {
   username: string;
@@ -37,11 +38,15 @@ AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // const [user, setUser] = useState<User | null>(null);
+  const queryClient = useQueryClient()
   const {data: user, error, isIdle, isError, isLoading, isSuccess, run, setData: setUser} = useSync<User | null>();
 
   const login = (form: AuthForm) => auth.login(form).then(setUser); // ?? 为什么能这么写
   const register = (form: AuthForm) => auth.register(form).then(setUser);
-  const logout = () => auth.logout().then(() => setUser(null));
+  const logout = () => auth.logout().then(() => {
+    queryClient.clear();// 登出时清空缓存 解决新注册登陆的用户 展示之前缓存数据的问题
+    setUser(null);
+  });
 
   useMount(() => {
     run(bootStrapUser());

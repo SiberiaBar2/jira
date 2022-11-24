@@ -1,6 +1,6 @@
 import { Form, Input } from "antd";
 import { UseSelect } from "components/use-select";
-import { Project } from "./list";
+import { Project } from "types/project";
 
 export interface User {
   id: number;
@@ -18,7 +18,7 @@ interface SearchPanelProps {
 }
 
 const SearchPanel = (props: SearchPanelProps) => {
-  const { users, param, setParam } = props;
+  const { param, setParam } = props;
     
   return (
     <Form style={{marginBottom: '2rem'}} layout={'inline'}>

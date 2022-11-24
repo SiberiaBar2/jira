@@ -16,13 +16,13 @@ export const ProjectsPopover = () => {
         </Typography.Text>
         <List>
         {
-            pinnedProjects?.map(projects => <List.Item>
+            pinnedProjects?.map(projects => <List.Item key={projects.id}>
                 {<List.Item.Meta title={projects.name} />}
             </List.Item>)
         }
         </List>
         <Divider />
-        <ButtonNoPadding type="link" onClick={() => open()}>创建项目</ButtonNoPadding>
+        <ButtonNoPadding type="link" onClick={open}>创建项目</ButtonNoPadding>
     </ContentContainer>
     return <Popover placement="bottom" content={content}>
         <h2>项目</h2>

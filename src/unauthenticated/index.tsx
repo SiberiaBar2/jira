@@ -4,6 +4,7 @@ import LoginScreen from "./login";
 import RegisterScreen from "./register";
 import styled from "@emotion/styled";
 import useDocumentTitle from "logichooks/useDocumentTitle";
+import { ErrorBox } from "components/lib";
 
 export const UnAuthentIcatedAPP = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -17,7 +18,7 @@ export const UnAuthentIcatedAPP = () => {
         <Title>
           {isRegister ? '请注册' :'请登录'}
         </Title>
-        {error ? <Typography.Text type="danger">{error.message}</Typography.Text> : null}
+        <ErrorBox />
         {isRegister ? <RegisterScreen onError={setError} /> : <LoginScreen onError={setError} />}
         <Divider />
         <Button type="link" onClick={() => setIsRegister(!isRegister)}>
