@@ -5,12 +5,12 @@ import { ErrorBox } from "components/lib";
 import { UseSelect } from "components/use-select";
 import { useAddProject, useEditProject } from "logichooks/useEditProject";
 import { useEffect } from "react";
-import {useProjectModal} from "./utils";
+import {useProjectModal, useProjectsQueryKey} from "./utils";
 
 const ProjectsModal = () => {
     const {projectModalOpen, close, editingProject, isLoading} = useProjectModal();
     const useMutataProject = editingProject ? useEditProject : useAddProject; 
-    const {mutateAsync, isLoading: mutateLoading, error, } = useMutataProject();
+    const {mutateAsync, isLoading: mutateLoading, error, } = useMutataProject(useProjectsQueryKey());
     
     const [form] = useForm()
     const onFinish = (values: any) => {

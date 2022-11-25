@@ -8,6 +8,7 @@ import { Card } from "antd";
 import { useTasks } from "screen/utils";
 import { Kanban } from "types/kanban";
 import { useTaskType } from "utils/task.type";
+import { CreateTasks } from './create-tasks';
 import { useTasksSearchParams } from "./utils";
 
 type IconType = React.ForwardRefExoticComponent<any>;
@@ -27,7 +28,7 @@ const TaskIcon = ({id}: {id: number}) => {
 };
 
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
-  const { data: allTasks } = useTasks();
+  const { data: allTasks } = useTasks(useTasksSearchParams());
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
 
   return (
@@ -42,6 +43,7 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
                     </Card>
                 );
             })}
+            <CreateTasks kanbanId={kanban.id} />
         </TasksContainer>
     </Container>
   );
@@ -53,7 +55,7 @@ const IconContainer = styled(Icon)`
     /* text-align: center; */
 `
 
-const Container = styled.div`
+export const Container = styled.div`
     min-width: 27rem;
     border-radius: 6px;
     background-color: rgb(244, 245, 247);

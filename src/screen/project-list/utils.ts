@@ -3,7 +3,7 @@ import {useQueryParam, useSetUrlSearchParam} from "logichooks/useQueryParam";
 import { useProject } from "logichooks/useProject";
 import { useSearchParams } from "react-router-dom";
 
-export const useProjectSearchParam = () => {
+export const  useProjectSearchParam = () => {
     const [param, setParam] = useQueryParam(['name', 'personId']);
 
     return [
@@ -13,6 +13,11 @@ export const useProjectSearchParam = () => {
         ),
         setParam
     ] as const // as const 解决了使用时 变量和函数类型报错的问题
+};
+
+export const useProjectsQueryKey = () => {
+    const [param] = useProjectSearchParam();
+    return ['projects', param];
 };
 
 // 全局url状态管理器

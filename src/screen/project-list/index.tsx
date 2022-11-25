@@ -19,7 +19,7 @@ const ProjectList = () => {
 
   const debouncedParam = useDebounce(param, 500); // 对值进行debounce，只取最后结果
 
-  const { isLoading, data: list, error } = useProjects(debouncedParam);
+  const { isLoading, data: list } = useProjects(debouncedParam);
   const { data: users } = useUser();
 
   return (

@@ -7,13 +7,15 @@ export const useProjectIdUrl = () => {
     const {pathname} = useLocation();
     const id = pathname.match(/projects\/(\d+)/)?.[1];
     return Number(id);
-}
+};
 
 export const useProjectInUrl = () => useProject(useProjectIdUrl());
 
 export const useKanbansSearchParams = () => ({projectId: useProjectIdUrl()});
 
-export const useKanbansQueryKey = () => ['kanbans', useKanbansSearchParams];
+export const useKanbansQueryKey = () => ['kanbans', useKanbansSearchParams()];
+
+export const useTasksQueryKey = () => ['tasks', useTasksSearchParams()]; // useTasksSearchParams 记得加 ()
 
 export const useTasksSearchParams = () => {
     const [param, setParam] = useQueryParam([
@@ -21,7 +23,7 @@ export const useTasksSearchParams = () => {
         'typeId',
         'processorId',
         'tagId'
-    ])
+    ]);
     const projectId = useProjectIdUrl();
     return useMemo(() => ({
         projectId,
@@ -31,5 +33,3 @@ export const useTasksSearchParams = () => {
         name: param.name || undefined,
     }), [projectId, param]);
 };
-
-export const useTasksQueryKey = () => ['tasks', useTasksSearchParams];

@@ -44,13 +44,18 @@ export const ProjectScreen = () => {
 const Aside = styled.aside`
   background-color: rgb(244, 245, 247);
   display: flex;
+  height: 100%;
 `;
 const Main = styled.div`
   display: flex;
   box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  overflow: hidden; // 为什么加了这个属性 看板就能横向滚动了？
 `;
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 16rem 1fr;
+  height: 100%;
+  /* overflow: hidden; */
 `;
