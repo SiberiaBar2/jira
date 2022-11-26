@@ -28,7 +28,11 @@ export const SearchPanel = () => {
       <UseSelect
         defaultOptionName="经办人"
         value={seachParams.processorId}
-        onChange={(value) => setSearchParams({ processorId:  value })}
+        onChange={(value) => {
+          console.log('1111111111111111');
+          
+          setSearchParams({ processorId:  value })
+        }}
       />
       <TaskTypeSelect
         defaultOptionName="类型"

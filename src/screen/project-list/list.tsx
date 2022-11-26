@@ -8,15 +8,6 @@ import { Project } from "types/project";
 import { User } from "./search-panel";
 import {useProjectModal, useProjectsQueryKey} from "./utils";
 
-// export interface Project {
-//   id: number;
-//   name: string;
-//   personId: number;
-//   pin: boolean;
-//   organization: string;
-//   created: number;
-// }
-
 interface ListProps extends TableProps<Project> {
   users: User[];
 }
@@ -24,7 +15,6 @@ const List = ({ users, ...props }: ListProps) => {
   const {mutate} = useEditProject(useProjectsQueryKey());
 
   const pinProject = (id: number) => (pin: boolean) => mutate({id, pin}); // 柯里化 refresh : 刷新列表
-
 
   return (
     <Table
@@ -93,7 +83,7 @@ const More = ({project}: {project: Project}) => {
       cancelText: '取消', 
       onOk() {
         deleteProject({id});
-      }
+      },
     });
   };
 
@@ -105,6 +95,6 @@ const More = ({project}: {project: Project}) => {
       <ButtonNoPadding type="link">...</ButtonNoPadding>
     </Dropdown>
   )
-}
+};
 
 export default List;

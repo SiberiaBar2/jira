@@ -18,7 +18,7 @@ const ProjectsModal = () => {
             form.resetFields();
             close();
         })
-    }; 
+    };
 
     const title = editingProject ? '编辑项目': '创建项目';
 

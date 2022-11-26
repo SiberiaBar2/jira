@@ -7,7 +7,7 @@ const useEditProject = (queryKey: QueryKey) => {
   const client = useHttp();
   // 报错 暂留
   // const [searchParams] = useProjectSearchParam();
-  
+
   return useMutation(
     (param: Partial<Project>) =>
       client(`projects/${param.id}`, {

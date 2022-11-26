@@ -25,7 +25,7 @@ export const useProjectsQueryKey = () => {
 export const useProjectModal = () => {
     const [{projectCreate}, setProjectCreate] = useQueryParam(['projectCreate']);
     const [{editingProjectId}, setEditingProjectId] = useQueryParam(['editingProjectId']);
-    
+
     const setUrlParams = useSetUrlSearchParam();
     // 修改时的 projects-list 的一项
     const {data: editingProject, isLoading} = useProject(Number(editingProjectId));
@@ -39,9 +39,9 @@ export const useProjectModal = () => {
         // setProjectCreate({projectCreate: undefined});
         // setEditingProjectId({ editingProjectId: undefined});
 
-        setUrlParams({setUrlParams: '', editingProjectId: ''})
+        setUrlParams({setUrlParams: '', editingProjectId: ''});
     };
-    
+
     const startEdit = (id: number) => {
         setEditingProjectId({editingProjectId: id})
     };
