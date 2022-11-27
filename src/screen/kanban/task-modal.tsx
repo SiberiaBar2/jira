@@ -34,7 +34,7 @@ export const TaskModal = () => {
     const confirmDeleteTask = () => {
         close();
         Modal.confirm({
-          title: '确定删除看板吗?',
+          title: '确定删除任务吗?',
           content: '点击确定删除',
           okText: '确定',
           cancelText: '取消', 
@@ -49,7 +49,7 @@ export const TaskModal = () => {
             okText='确定' 
             cancelText='取消' 
             title='编辑任务' 
-            onOk={onOk }
+            onOk={onOk}
             onCancel={onCancel}
             confirmLoading={editLoading} 
             forceRender

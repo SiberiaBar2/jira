@@ -2,7 +2,7 @@ import { useHttp } from "utils/http";
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { Kanban } from "types/kanban";
 import { Task } from "types/task";
-import {useAddConfig, useDeleteConfig, useEditConfig} from 'logichooks/use-optimistic';
+import {useAddConfig, useDeleteConfig, useEditConfig, useReorder} from 'logichooks/use-optimistic';
  
 export const useKanbans = (param?: Partial<Kanban>) => {
   const client = useHttp();
@@ -82,5 +82,37 @@ export const useDeleteTask  = (queryKey: QueryKey) => {
         method: "DELETE",
       }),
       useDeleteConfig(queryKey)
+  );
+};
+
+export interface SortProp {
+  fromId: number // 要重新排序的item
+  referenceId: number // 目标item
+  type: 'before' | 'after' //  房子目标item的前还是后 
+  fromKanbanId?: number
+  toKanbanId?: number
+} 
+
+export const useReorderKanban = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (params: SortProp) => 
+      client('kanbans/reorder', {
+        data: params,
+        method: 'POST'
+      }),
+    useReorder(queryKey)
+  );
+};
+
+export const useReorderTask = (queryKey: QueryKey)  => {
+  const client = useHttp();
+  return useMutation(
+    (params: SortProp) => 
+      client('tasks/reorder', {
+        data: params,
+        method: 'POST'
+      }),
+    useReorder(queryKey)
   );
 };

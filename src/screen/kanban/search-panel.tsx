@@ -29,8 +29,6 @@ export const SearchPanel = () => {
         defaultOptionName="经办人"
         value={seachParams.processorId}
         onChange={(value) => {
-          console.log('1111111111111111');
-          
           setSearchParams({ processorId:  value })
         }}
       />
