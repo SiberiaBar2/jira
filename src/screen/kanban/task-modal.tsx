@@ -12,8 +12,8 @@ export const TaskModal = () => {
     const {mutate: deleteTask} = useDeleteTask(useTasksQueryKey());
 
     const layout = {
-        lableCol: {span: 8},// 左边的文字
-        wrapperCol: {span: 16},// 右边的表单 
+        labelCol: {span: 8},// 左边的文字
+        wrapperCol: {span: 16},// 右边的表单
     };
 
     const [form] = useForm(); 
@@ -66,7 +66,7 @@ export const TaskModal = () => {
                 </Form.Item>
             </Form>
             <div style={{textAlign: 'right'}}>
-                <Button size="small" style={{fontSize: '14px'}} onClick={confirmDeleteTask}>删除</Button>
+                <Button size="small" type="link" style={{fontSize: '14px'}} onClick={confirmDeleteTask}>删除</Button>
             </div>
         </Modal>
     );

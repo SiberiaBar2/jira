@@ -8,6 +8,7 @@ import ProjectList from "screen/project-list";
 import {BrowserRouter as Router} from "react-router-dom";
 import ProjectsModal from "screen/project-list/projects-modal";
 import {ProjectsPopover} from "components/projects-popover";
+import { UserPopover } from "components/user-popover";
 
 export const AuthentIcateApp = () => {
     const {logout, user} = useAuth();
@@ -37,7 +38,7 @@ export const AuthentIcateApp = () => {
                 <HeaderLeft gap={true}>
                     <h2>JiraSoftWare</h2>
                     <ProjectsPopover />
-                    <h2>用户</h2>
+                    <UserPopover />
                 </HeaderLeft>
                 <HeaderRight>
                     {renderUser()}

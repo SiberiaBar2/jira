@@ -30,7 +30,7 @@ export const KanbanScreen = () => {
   // onDragEnd 拖拽持久化的操作
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <ScreenContainer>
+        <ScreenContainer>
         <h1>{currentProject?.name}看板</h1>
         <SearchPanel />
         {isLoading ? (
@@ -96,13 +96,13 @@ const useDragEnd = () => {
             const fromTask = allTasks?.filter(task => task.kanbanId === fromKanbanId)[source.index];
             const toTask = allTasks?.filter(task => task.kanbanId === toKanbanId)[destination.index];
 
-            if (fromTask.id === toTask.id){
+            if (fromTask?.id === toTask?.id){
                 return;
             }
 
             reorderTask({
-              fromId: fromTask.id,
-              referenceId: toTask.id, 
+              fromId: fromTask?.id,
+              referenceId: toTask?.id, 
               fromKanbanId,
               toKanbanId,
               type: fromKanbanId === toKanbanId && destination.index > source.index ? 'after': 'before',

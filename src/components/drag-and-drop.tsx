@@ -1,14 +1,14 @@
 import React, { ReactNode, forwardRef } from "react";
 import {
     Draggable,
-    Droppable, 
-    DroppableProps, 
-    DroppableProvided, 
+    Droppable,
+    DroppableProps,
+    DraggableProps,
+    DroppableProvided,
     DraggableProvided,
-    DroppableProvidedProps, 
-    DraggableProvidedDraggableProps, 
+    DroppableProvidedProps,
+    DraggableProvidedDraggableProps,
     DraggableProvidedDragHandleProps,
-    DraggableProps, 
 } from "react-beautiful-dnd";
 
 type DropProps = Omit<DroppableProps, 'children'> & { children: ReactNode}
@@ -43,7 +43,7 @@ export const DropChild = forwardRef<HTMLDivElement, DropChildProps>(({children, 
         {children}
         {props.provided?.placeholder}
     </div>;
-}); 
+});
 
 
 type DragProps = Omit<DraggableProps, 'children'> & { children: ReactNode}

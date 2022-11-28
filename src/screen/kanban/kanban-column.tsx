@@ -23,44 +23,44 @@ import {
 type IconType = React.ForwardRefExoticComponent<any>;
 
 const TaskIcon = ({ id }: { id: number }) => {
-  const { data: taskTypes } = useTaskType();
-  const name = taskTypes?.find((taskType) => taskType.id === id)?.name;
-  if (!name) {
-    return null;
-  }
-  return name === "task" ? (
-    <IconContainer
-      component={CheckCircleOutlined as IconType}
-      style={{ color: "#52c41a" }}
-    />
-  ) : (
-    <IconContainer
-      component={CloseCircleOutlined as IconType}
-      style={{ color: "#eb2f96" }}
-    />
-  );
+    const { data: taskTypes } = useTaskType();
+    const name = taskTypes?.find((taskType) => taskType.id === id)?.name;
+    if (!name) {
+        return null;
+    }
+    return name === "task" ? (
+        <IconContainer
+            component={CheckCircleOutlined as IconType}
+            style={{ color: "#52c41a" }}
+        />
+    ) : (
+        <IconContainer
+        component={CloseCircleOutlined as IconType}
+        style={{ color: "#eb2f96" }}
+        />
+    );
 };
 
 const TaskCard = ({ task }: { task: Task }) => {
-  const { startEdit } = useTaskModal();
-  const { name: keyword } = useTasksSearchParams();
+    const { startEdit } = useTaskModal();
+    const { name: keyword } = useTasksSearchParams();
 
-  return (
-    <Card
-      onClick={() => startEdit(task.id)}
-      style={{ marginBottom: "0.5rem", cursor: "pointer" }}
-      key={task.id}
-    >
-      <p>
-        <Mark name={task.name} keyword={keyword || ""} />
-      </p>
-      <TaskIcon id={task.typeId} />
-    </Card>
-  );
+    return (
+        <Card
+            onClick={() => startEdit(task.id)}
+            style={{ marginBottom: "0.5rem", cursor: "pointer" }}
+            key={task.id}
+            >
+            <p>
+                <Mark name={task.name} keyword={keyword || ""} />
+            </p>
+            <TaskIcon id={task.typeId} />
+        </Card>
+    );
 };
 
 export const KanbanColumn = forwardRef<HTMLDivElement, { kanban: Kanban }>(
-  ({ kanban, ...props }, ref) => {
+    ({ kanban, ...props }, ref) => {
     const { data: allTasks } = useTasks(useTasksSearchParams());
     const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
 
@@ -93,32 +93,32 @@ export const KanbanColumn = forwardRef<HTMLDivElement, { kanban: Kanban }>(
 );
 
 const More = ({ kanban }: { kanban: Kanban }) => {
-  const { mutateAsync } = useDeleteKanban(useKanbansQueryKey());
-  const confirmDeleteKanban = () => {
-    Modal.confirm({
-      title: "确定删除看板吗?",
-      content: "点击确定删除",
-      okText: "确定",
-      cancelText: "取消",
-      onOk() {
-        mutateAsync({ id: kanban.id });
-      },
-    });
-  };
+    const { mutateAsync } = useDeleteKanban(useKanbansQueryKey());
+    const confirmDeleteKanban = () => {
+            Modal.confirm({
+            title: "确定删除看板吗?",
+            content: "点击确定删除",
+            okText: "确定",
+            cancelText: "取消",
+            onOk() {
+                mutateAsync({ id: kanban.id });
+            },
+        });
+    };
 
   return (
     <Dropdown
-      overlay={
+        overlay={
         <Menu>
           <Menu.Item key={"delete"} onClick={confirmDeleteKanban}>
             删除
           </Menu.Item>
         </Menu>
-      }
+        }
     >
-      <ButtonNoPadding type="link">...</ButtonNoPadding>
+        <ButtonNoPadding type="link">...</ButtonNoPadding>
     </Dropdown>
-  );
+    );
 };
 
 const IconContainer = styled(Icon)`

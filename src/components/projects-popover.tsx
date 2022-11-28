@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import { Divider, List, Popover, Typography } from "antd"
 import useProjects from "logichooks/useProjects";
 import { ButtonNoPadding } from "./lib";
-import {useProjectModal, useProjectSearchParam} from "../screen/project-list/utils";
+import { useProjectModal } from "../screen/project-list/utils";
 
 export const ProjectsPopover = () => {
     const {open} = useProjectModal();
-    const {data: projects, isLoading} = useProjects();
+    const {data: projects, refetch} = useProjects();
     
     const pinnedProjects = projects?.filter(project => project.pin);
     
@@ -24,7 +24,9 @@ export const ProjectsPopover = () => {
         <Divider />
         <ButtonNoPadding type="link" onClick={open}>创建项目</ButtonNoPadding>
     </ContentContainer>
-    return <Popover placement="bottom" content={content}>
+
+    // 显隐时重新调接口
+    return <Popover onVisibleChange={() => refetch()} placement="bottom" content={content}>
         <h2>项目</h2>
     </Popover>
 };
