@@ -31,12 +31,12 @@ const TaskIcon = ({ id }: { id: number }) => {
     return name === "task" ? (
         <IconContainer
             component={CheckCircleOutlined as IconType}
-            style={{ color: "#52c41a" }}
+            style={{ color: "rgb(54, 110, 231)" }}
         />
     ) : (
         <IconContainer
         component={CloseCircleOutlined as IconType}
-        style={{ color: "#eb2f96" }}
+        style={{ color: "rgb(183, 139, 226)" }}
         />
     );
 };

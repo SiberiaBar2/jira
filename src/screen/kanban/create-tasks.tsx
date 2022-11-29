@@ -1,4 +1,5 @@
 import { Card, Input } from "antd";
+import { ButtonNoPadding } from "components/lib";
 import { useEffect, useState } from "react";
 import { useAddTask } from "screen/utils";
 import { useProjectIdUrl, useTasksQueryKey } from "./utils";
@@ -25,7 +26,9 @@ export const CreateTasks = ({ kanbanId }: { kanbanId: number }) => {
   }, [inputMode]);
 
   if (!inputMode) {
-    return <div onClick={toogle}>创建事务</div>;
+    return <div onClick={toogle}>
+      <ButtonNoPadding type="link">+创建事务</ButtonNoPadding>
+    </div>;
   }
 
   return (

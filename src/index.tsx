@@ -9,6 +9,7 @@ import { loadServer, DevTools } from "jira-dev-tool";
 
 // 必须在 jira-dev-tool 后面引入
 import 'antd/dist/antd.less';
+// import 'antd/dist/reset.css';
 import { AppProviders } from "context";
 
 const root = ReactDOM.createRoot(

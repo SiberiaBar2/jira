@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {Button, Dropdown, Menu} from "antd";
 import {Row} from "components/lib";
-import {Routes, Route, Navigate} from "react-router";
+import {Routes, Route, Navigate, useNavigate} from "react-router";
 import {ProjectScreen} from "screen/screen";
 import {useAuth} from "context/auth-context";
 import ProjectList from "screen/project-list";
@@ -9,6 +9,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import ProjectsModal from "screen/project-list/projects-modal";
 import {ProjectsPopover} from "components/projects-popover";
 import { UserPopover } from "components/user-popover";
+import onthewind from "assets/on-the-wind.jpg";
 
 export const AuthentIcateApp = () => {
     const {logout, user} = useAuth();
@@ -32,11 +33,16 @@ export const AuthentIcateApp = () => {
         );
     };
 
-    const renderPageHeader = () => {
+    const PageHeader = () => {
+
+        const naivigate = useNavigate();
         return (
             <Header between={true}>
                 <HeaderLeft gap={true}>
-                    <h2>JiraSoftWare</h2>
+                    <h2 style={{cursor: 'pointer'}} 
+                        onClick={() => naivigate('/projects')}>
+                        JiraSoftWare
+                    </h2>
                     <ProjectsPopover />
                     <UserPopover />
                 </HeaderLeft>
@@ -50,7 +56,7 @@ export const AuthentIcateApp = () => {
     return (
         <Container>
             <Router>
-                {renderPageHeader()}
+                <PageHeader />
                 <Main>
                     <Routes>
                         <Route path="/projects" element={<ProjectList />}/>
@@ -69,6 +75,24 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 6rem 1fr;
   height: 100vh;
+  background-image: url(${onthewind});
+  border-color: transparent;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: left bottom;
+  z-index: 1;
+  position: relative;
+  ::after {
+    position: absolute;
+    left: 0;top: 0;
+    bottom: 0;right: 0;
+    content: '';
+    background: url(${onthewind});
+    background-size:cover ;
+    z-index: -1;
+    filter: blur(10px);
+  }
 `;
 const Header = styled(Row)`
   padding: 3.2rem;
