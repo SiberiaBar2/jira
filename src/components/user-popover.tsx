@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
 import { Divider, List, Popover, Typography } from "antd"
+import { Title } from "authenticated-app";
 import useUser from "logichooks/useUsers";
 
 export const UserPopover = () => {
     const {data: users, refetch} = useUser();
     
     const content = <ContentContainer>
-        <Typography.Text>
+        <Text>
             组员列表
-        </Typography.Text>
+        </Text>
         <List>
         {
             users?.map(user => <List.Item key={user.id}>
@@ -20,10 +21,14 @@ export const UserPopover = () => {
     </ContentContainer>
 
     return <Popover onVisibleChange={() => refetch()} placement="bottom" content={content}>
-        <h2>组员</h2>
+        <Title>组员</Title>
     </Popover>
 };
 
 const ContentContainer = styled.div`
     width: 30rem;
+`
+
+export const Text = styled(Typography.Text)`
+    color: rgb(160, 124, 207);
 `

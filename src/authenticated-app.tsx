@@ -39,10 +39,9 @@ export const AuthentIcateApp = () => {
         return (
             <Header between={true}>
                 <HeaderLeft gap={true}>
-                    <h2 style={{cursor: 'pointer'}} 
-                        onClick={() => naivigate('/projects')}>
+                    <Title onClick={() => naivigate('/projects')}>
                         JiraSoftWare
-                    </h2>
+                    </Title>
                     <ProjectsPopover />
                     <UserPopover />
                 </HeaderLeft>
@@ -106,3 +105,8 @@ const Main = styled.main`
   /* display: flex; */
   overflow: hidden;
 `;
+
+export const Title = styled.h2`
+    cursor: pointer;
+    color: rgb(160, 124, 207);
+`

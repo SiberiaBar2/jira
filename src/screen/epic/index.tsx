@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { Button, List, Modal } from "antd";
 import { Row, ScreenContainer } from "components/lib"
 import dayjs from "dayjs";
@@ -47,13 +48,17 @@ export const EpicScreen = () => {
             />
             <div>
                 {
-                    tasks?.filter(task => task.epicId === epic.id).map(task => <Link 
+                    tasks?.filter(task => task.epicId === epic.id).map(task => <LinkContainer 
                         to={`projects/${currentProject?.id}/kanban?editingTaskId=${task.id}`} key={task.id}>
                         {task.name}
-                    </Link>) 
+                    </LinkContainer>) 
                 }
             </div>
         </List.Item>} /> 
         <CreateEpic visible={epicCreateOpen} onClose={() => {setEpicCreateOpen(false)}}/>
     </ScreenContainer>
 };
+
+const LinkContainer = styled(Link)`
+    margin-right: 0.5rem;
+`

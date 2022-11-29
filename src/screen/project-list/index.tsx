@@ -25,7 +25,7 @@ const ProjectList = () => {
   return (
     <Conteainer>
       <Row between={true}>
-        <h1>项目列表</h1>
+        <Title>项目列表</Title>
         <Button onClick={open}>
           创建项目
         </Button>
@@ -48,3 +48,7 @@ export default ProjectList;
 const Conteainer = styled.div`
   padding: 3.2rem;
 `;
+
+const Title = styled.h1`
+    color: rgb(160, 124, 207);
+`
