@@ -32,8 +32,11 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "json-server": "json-server __json_server_mock___/db.json --watch --port 4001 --middlewares ./__json_server_mock___/middleware.js"
+    "json-server": "json-server __json_server_mock___/db.json --watch --port 4001 --middlewares ./__json_server_mock___/middleware.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -r git@github.com:SiberiaBar2/jira.github.io.git -b main"
   },
+  "homepage": "https://siberiabar2.github.io/jira.github.io",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -58,6 +61,7 @@
     "@types/react-beautiful-dnd": "^13.1.2",
     "add": "^2.0.6",
     "eslint-config-prettier": "^8.5.0",
+    "gh-pages": "^4.0.0",
     "global": "^4.4.0",
     "jira-dev-tool": "^1.6.59",
     "json-server": "^0.17.1",
