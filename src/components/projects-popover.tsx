@@ -28,7 +28,7 @@ export const ProjectsPopover = () => {
     </ContentContainer>
 
     // 显隐时重新调接口
-    return <Popover onVisibleChange={() => refetch()} placement="bottom" content={content}>
+    return <Popover onOpenChange={() => refetch()} placement="bottom" content={content}>
         <Title>项目</Title>
     </Popover>
 };

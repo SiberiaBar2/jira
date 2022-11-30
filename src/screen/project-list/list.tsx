@@ -1,4 +1,4 @@
-import { Dropdown, Menu, Modal, Table, TableProps } from "antd";
+import { Button, Dropdown, Modal, Table, TableProps } from "antd";
 import { ButtonNoPadding } from "components/lib";
 import Pin from "components/pin";
 import dayjs from "dayjs";
@@ -87,14 +87,22 @@ const More = ({project}: {project: Project}) => {
     });
   };
 
+  const items = [
+    {
+      label: <Button type={"link"} onClick={editProject(project.id)}>编辑</Button>,
+      key: 'edit',
+    },
+    {
+      label: <Button type={"link"} onClick={() => confirmDeleteProject(project.id)}>删除</Button>,
+      key: 'delete',
+    },
+  ];
+
   return (
-    <Dropdown overlay={<Menu> 
-      <Menu.Item key={'edit'} onClick={editProject(project.id)}>编辑</Menu.Item>
-      <Menu.Item key={'delete'} onClick={() => confirmDeleteProject(project.id)}>删除</Menu.Item>
-    </Menu>}>
+    <Dropdown menu={{items}}>
       <ButtonNoPadding type="link">...</ButtonNoPadding>
     </Dropdown>
-  )
+  );
 };
 
 export default List;

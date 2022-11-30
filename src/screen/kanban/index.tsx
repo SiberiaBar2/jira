@@ -4,6 +4,7 @@ import { Drag, Drop, DropChild } from "components/drag-and-drop";
 import { ScreenContainer } from "components/lib";
 import { useCallback } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { TitleLarge } from "screen/project-list";
 import { useKanbans, useReorderKanban, useReorderTask, useTasks } from "screen/utils";
 import { CreateKanban } from "./create-kanban";
 import { KanbanColumn } from "./kanban-column";
@@ -31,7 +32,7 @@ export const KanbanScreen = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
         <ScreenContainer>
-        <h1>{currentProject?.name}看板</h1>
+        <TitleLarge>{currentProject?.name}看板</TitleLarge>
         <SearchPanel />
         {isLoading ? (
             <Spin size="large" />

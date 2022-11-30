@@ -7,7 +7,7 @@ import { useProjectIdUrl } from "screen/kanban/utils";
 import { useEpicsQueryKey } from "./config";
 import { useAddEpics } from "./utils"; 
 
-export const CreateEpic = (props: Pick<DrawerProps, 'visible'> & {onClose: () => void}) => {
+export const CreateEpic = (props: Pick<DrawerProps, 'open'> & {onClose: () => void}) => {
     const [form] = useForm();
     const {mutate: addEpic, isLoading, error} = useAddEpics(useEpicsQueryKey());
     const projectId = useProjectIdUrl();
@@ -19,9 +19,9 @@ export const CreateEpic = (props: Pick<DrawerProps, 'visible'> & {onClose: () =>
 
     useEffect(() => { 
         form.resetFields();
-    }, [form, props.visible]);
+    }, [form, props.open]);
 
-    return <Drawer open={props.visible} onClose={props.onClose} forceRender destroyOnClose width={'100%'}>
+    return <Drawer open={props.open} onClose={props.onClose} forceRender destroyOnClose width={'100%'}>
         <Container>
         {isLoading? <Spin size="large" />: <>
                     <h1>创建任务组</h1> 
@@ -46,4 +46,3 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
 `
-  

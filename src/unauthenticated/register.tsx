@@ -20,7 +20,6 @@ const RegisterScreen = ({onError}: {onError : (error: Error) => void}) => {
     }
   };
 
-
   return (
     <Form onFinish={handelSubmit}>
       <Form.Item name="username" rules={[{required: true, message: '请输入用户名'}]}>

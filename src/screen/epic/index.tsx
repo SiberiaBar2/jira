@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useProjectInUrl } from "screen/kanban/utils";
+import { TitleLarge } from "screen/project-list";
 import { useTasks } from "screen/utils";
 import { Epics } from "types/epic";
 import { useEpicsQueryKey, useEpicsSearchParams } from "./config";
@@ -32,7 +33,7 @@ export const EpicScreen = () => {
 
     return <ScreenContainer> 
         <Row between>
-            <h1>{currentProject?.name}任务组</h1>
+            <TitleLarge>{currentProject?.name}任务组</TitleLarge>
             <Button onClick={() => {setEpicCreateOpen(true)}}>创建任务组</Button>
         </Row>
         <List style={{overflow: 'scroll'}} dataSource={epics} itemLayout='vertical' renderItem={epic => <List.Item>
@@ -47,15 +48,16 @@ export const EpicScreen = () => {
             </div>}
             />
             <div>
+                {/* projects 前没有加 / ，结果： 在原来路由基础上叠加了，无法起到真正的跳转效果 */}
                 {
                     tasks?.filter(task => task.epicId === epic.id).map(task => <LinkContainer 
-                        to={`projects/${currentProject?.id}/kanban?editingTaskId=${task.id}`} key={task.id}>
+                        to={`/projects/${currentProject?.id}/kanban?editingTaskId=${task.id}`} key={task.id}>
                         {task.name}
                     </LinkContainer>) 
                 }
             </div>
         </List.Item>} /> 
-        <CreateEpic visible={epicCreateOpen} onClose={() => {setEpicCreateOpen(false)}}/>
+        <CreateEpic open={epicCreateOpen} onClose={() => {setEpicCreateOpen(false)}}/>
     </ScreenContainer>
 };
 

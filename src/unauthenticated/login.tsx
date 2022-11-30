@@ -1,12 +1,14 @@
 import { useAuth } from "context/auth-context";
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { LongButton } from "unauthenticated";
 import useSync from "logichooks/useSync";
 // import useSyncCallback from "logichooks/useSyncCallback";
 
 const LoginScreen = ({onError}: {onError : (error: Error) => void}) => {
   const { login } = useAuth();
-  const {isLoading , run, error} = useSync(undefined, {throwOnError: true});
+  const {isLoading , run} = useSync(undefined, {throwOnError: true});
+  // console.log('error', error);
+  
   // const getSync = useSyncCallback<unknown>(() => {
   //   console.log('syncError', error);// syncCallback hook竟然也不能捕捉到同步的值？？？
   // });

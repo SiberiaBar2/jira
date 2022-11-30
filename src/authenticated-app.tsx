@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import {Button, Dropdown, Menu} from "antd";
+import {Button, Dropdown} from "antd";
 import {Row} from "components/lib";
 import {Routes, Route, Navigate, useNavigate} from "react-router";
 import {ProjectScreen} from "screen/screen";
@@ -13,18 +13,15 @@ import onthewind from "assets/on-the-wind.jpg";
 
 export const AuthentIcateApp = () => {
     const {logout, user} = useAuth();
+
+    const items = [{
+        label: <Button type={"link"} onClick={logout}>登出</Button>,
+        key: 'logout',
+    }];
     const renderUser = () => {
         return (
             <Dropdown
-                overlay={
-                    <Menu>
-                        <Menu.Item key={"logout"}>
-                            <Button type={"link"} onClick={logout}>
-                                登出
-                            </Button>
-                        </Menu.Item>
-                    </Menu>
-                }
+                menu={{items}}
             >
                 <Button type={"link"} onClick={(e) => e.preventDefault()}>
                     hi {user?.name}

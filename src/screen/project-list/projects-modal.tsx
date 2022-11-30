@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import {Button, Drawer, Form, Input, Spin} from "antd";
+import { Button, Drawer, Form, Input, Spin } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { ErrorBox } from "components/lib";
 import { UseSelect } from "components/use-select";
 import { useAddProject, useEditProject } from "logichooks/useEditProject";
 import { useEffect } from "react";
-import {useProjectModal, useProjectsQueryKey} from "./utils";
+import { useProjectModal, useProjectsQueryKey } from "./utils";
 
 const ProjectsModal = () => {
     const {projectModalOpen, close, editingProject, isLoading} = useProjectModal();
@@ -56,7 +56,7 @@ const ProjectsModal = () => {
             </Container>
         </Drawer>
     )
-}
+};
 
 export default ProjectsModal;
 

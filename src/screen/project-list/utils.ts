@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import {useQueryParam, useSetUrlSearchParam} from "logichooks/useQueryParam";
 import { useProject } from "logichooks/useProject";
-import { useSearchParams } from "react-router-dom";
 
 export const  useProjectSearchParam = () => {
     const [param, setParam] = useQueryParam(['name', 'personId']);

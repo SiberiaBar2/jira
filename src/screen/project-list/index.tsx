@@ -25,7 +25,7 @@ const ProjectList = () => {
   return (
     <Conteainer>
       <Row between={true}>
-        <Title>项目列表</Title>
+        <TitleLarge>项目列表</TitleLarge>
         <Button onClick={open}>
           创建项目
         </Button>
@@ -36,6 +36,7 @@ const ProjectList = () => {
         loading={isLoading}
         users={users || []}
         dataSource={list || []}
+        rowKey={item => item.id}
       />
     </Conteainer>
   );
@@ -49,6 +50,6 @@ const Conteainer = styled.div`
   padding: 3.2rem;
 `;
 
-const Title = styled.h1`
+export const TitleLarge = styled.h1`
     color: rgb(160, 124, 207);
 `

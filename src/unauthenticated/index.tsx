@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Typography } from "antd";
+import { Button, Card, Divider } from "antd";
 import { useState } from "react";
 import LoginScreen from "./login";
 import RegisterScreen from "./register";
@@ -17,7 +17,7 @@ export const UnAuthentIcatedAPP = () => {
     <Container style={{ display: "flex", justifyContent: "center" }}>
       <ShadowCard>
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
-        <ErrorBox />
+        <ErrorBox error={error} />
         {isRegister ? (
           <RegisterScreen onError={setError} />
         ) : (
@@ -81,8 +81,8 @@ const Container = styled.div`
   align-items: center;
   min-height: 100vh;
   background-image: url(${onthewind});
-  /* background-repeat: no-repeat; */
-  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   background-position: left bottom;
 `;

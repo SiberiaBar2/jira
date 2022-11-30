@@ -3,7 +3,7 @@ import Icon, {
   CloseCircleOutlined,
 } from "@ant-design/icons";
 import styled from "@emotion/styled";
-import { Card, Dropdown, Menu, Modal } from "antd";
+import { Button, Card, Dropdown, Modal } from "antd";
 import { Drag, Drop, DropChild } from "components/drag-and-drop";
 import { ButtonNoPadding, Row } from "components/lib";
 import { Mark } from "components/mark";
@@ -106,15 +106,14 @@ const More = ({ kanban }: { kanban: Kanban }) => {
         });
     };
 
+    const items = [{
+      label: <Button type={"link"} onClick={confirmDeleteKanban}>删除</Button>,
+      key: 'delete',
+  }];
+
   return (
     <Dropdown
-        overlay={
-        <Menu>
-          <Menu.Item key={"delete"} onClick={confirmDeleteKanban}>
-            删除
-          </Menu.Item>
-        </Menu>
-        }
+        menu={{items}}
     >
         <ButtonNoPadding type="link">...</ButtonNoPadding>
     </Dropdown>

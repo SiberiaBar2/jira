@@ -5,7 +5,7 @@ import useUser from "logichooks/useUsers";
 
 export const UserPopover = () => {
     const {data: users, refetch} = useUser();
-    
+
     const content = <ContentContainer>
         <Text>
             组员列表
@@ -20,7 +20,7 @@ export const UserPopover = () => {
         <Divider />
     </ContentContainer>
 
-    return <Popover onVisibleChange={() => refetch()} placement="bottom" content={content}>
+    return <Popover onOpenChange={() => refetch()} placement="bottom" content={content}>
         <Title>组员</Title>
     </Popover>
 };

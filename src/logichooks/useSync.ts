@@ -24,7 +24,7 @@ const useSafeDispatch = <T>(dispatch: (...args: T[]) => void) => {
 };
  
 const useSync = <D>(initialState?: State<D>, initialConfig?: typeof defaultConfig) => {
-    const config = {...defaultConfig, initialConfig}
+    const config = {...defaultConfig, ...initialConfig};
     const [state, dispatch] = useReducer((state: State<D>, actions: Partial<State<D>>) => ({...state, ...actions}),{
         ...defaultInitialState,
         ...initialState,
@@ -72,7 +72,9 @@ const useSync = <D>(initialState?: State<D>, initialConfig?: typeof defaultConfi
         })
         .catch(error => {
             setError(error); 
-            if (config.throwOnError) return Promise.reject(error);
+            if (config.throwOnError) {
+                return Promise.reject(error)
+            };
             return error;
         })
     },[config.throwOnError, safeDispatch, setData, setError]);

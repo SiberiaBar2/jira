@@ -57,5 +57,4 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 16rem 1fr;
   height: 100%;
-  /* overflow: hidden; */
 `;
