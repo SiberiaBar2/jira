@@ -14,11 +14,12 @@ import onthewind from "assets/on-the-wind.jpg";
 export const AuthentIcateApp = () => {
     const {logout, user} = useAuth();
 
-    const items = [{
-        label: <Button type={"link"} onClick={logout}>登出</Button>,
-        key: 'logout',
-    }];
-    const renderUser = () => {
+    const User = () => {
+        const items = [{
+            label: <Button type={"link"} onClick={logout}>登出</Button>,
+            key: 'logout',
+        }];
+
         return (
             <Dropdown
                 menu={{items}}
@@ -43,7 +44,7 @@ export const AuthentIcateApp = () => {
                     <UserPopover />
                 </HeaderLeft>
                 <HeaderRight>
-                    {renderUser()}
+                    <User />
                 </HeaderRight>
             </Header>
         );

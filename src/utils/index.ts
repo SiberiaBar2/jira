@@ -14,3 +14,5 @@ export const cleanObject = (obj: {[key: string]: unknown}) => {
 
     return result;
 };
+
+export const clearRouter = () => window.location.pathname = '';

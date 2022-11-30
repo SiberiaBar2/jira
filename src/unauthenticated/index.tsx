@@ -44,7 +44,7 @@ const Title = styled.h1`
   margin-bottom: 2.4rem;
   color: rgb(160, 124, 207);
 `;
-const SpanContainer = styled.span`
+export const SpanContainer = styled.span`
   color: rgb(160, 124, 207);
 `;
 // @emotion 只能跟html标签 其他标签要这样写

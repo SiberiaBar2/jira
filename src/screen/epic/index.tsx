@@ -8,6 +8,7 @@ import { useProjectInUrl } from "screen/kanban/utils";
 import { TitleLarge } from "screen/project-list";
 import { useTasks } from "screen/utils";
 import { Epics } from "types/epic";
+import { SpanContainer } from "unauthenticated";
 import { useEpicsQueryKey, useEpicsSearchParams } from "./config";
 import { CreateEpic } from "./create-epic";
 import { useDeleteEpics, useEpics } from "./utils";
@@ -39,7 +40,7 @@ export const EpicScreen = () => {
         <List style={{overflow: 'scroll'}} dataSource={epics} itemLayout='vertical' renderItem={epic => <List.Item>
             <List.Item.Meta 
                 title={<Row between>
-                <span>{epic.name}</span>
+                <SpanContainer>{epic.name}</SpanContainer>
                 <Button type="link" onClick={() => confirmDeleteEpic(epic)}>删除</Button>
             </Row>}
             description={<div>

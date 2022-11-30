@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { URLSearchParamsInit, useSearchParams } from "react-router-dom"
+import { useCallback, useMemo } from "react";
+import { URLSearchParamsInit, useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { cleanObject } from "utils";
 
 export const useQueryParam = <K extends string>(keys: K[]) => {
@@ -29,4 +29,20 @@ export const useSetUrlSearchParam = () => {
         }) as URLSearchParamsInit;
         return setSearchParams(o);
     };
+};
+
+export const useClearAllSearchParam = () => {
+    const [searchParams] = useSearchParams();
+    const clearSearchParams = useSetUrlSearchParam();
+
+    return useCallback(() => {
+        const clearParams = Object.keys(Object.fromEntries(searchParams)).reduce((prev, key) => {
+            return {
+                ...prev,
+                [key]: '',
+            }
+        }, {} as {[x:string]: unknown});
+    
+        clearSearchParams(clearParams);
+    },[clearSearchParams, searchParams])
 };
