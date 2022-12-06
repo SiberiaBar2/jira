@@ -60,7 +60,7 @@ const TaskCard = ({ task }: { task: Task }) => {
 };
 
 export const KanbanColumn = forwardRef<HTMLDivElement, { kanban: Kanban }>(
-    ({ kanban, ...props }, ref) => {
+    ({ kanban, ...props }, ref) => {// 这里三项返回的参数变了 重新请求 useTasks
     const { data: allTasks } = useTasks(useTasksSearchParams());
     const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
 

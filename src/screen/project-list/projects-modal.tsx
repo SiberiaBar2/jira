@@ -12,7 +12,7 @@ const ProjectsModal = () => {
     const useMutataProject = editingProject ? useEditProject : useAddProject; 
     const {mutateAsync, isLoading: mutateLoading, error, } = useMutataProject(useProjectsQueryKey());
     
-    const [form] = useForm()
+    const [form] = useForm();
     const onFinish = (values: any) => {
         mutateAsync({...editingProject, ...values}).then(() => {
             form.resetFields();

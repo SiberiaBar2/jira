@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { URLSearchParamsInit, useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import { URLSearchParamsInit, useSearchParams } from "react-router-dom"
 import { cleanObject } from "utils";
 
 export const useQueryParam = <K extends string>(keys: K[]) => {

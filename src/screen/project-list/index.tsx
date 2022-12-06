@@ -11,7 +11,7 @@ import {useProjectModal, useProjectSearchParam} from "./utils";
 import { ErrorBox, Row } from "components/lib";
 
 const ProjectList = () => {
-    const {open} = useProjectModal();
+  const {open} = useProjectModal();
 
   useDocumentTitle("项目列表", false);
 

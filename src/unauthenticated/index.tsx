@@ -14,7 +14,7 @@ export const UnAuthentIcatedAPP = () => {
   useDocumentTitle("请登录注册以继续", false);
 
   return (
-    <Container style={{ display: "flex", justifyContent: "center" }}>
+    <Container>
       <ShadowCard>
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
         <ErrorBox error={error} />

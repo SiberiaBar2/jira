@@ -36,7 +36,7 @@ export const useTasksSearchParams = () => {
         processorId: Number(param.processorId) || undefined,
         tagId: Number(param.tagId) || undefined,
         name: debounceName || undefined,
-    }), [projectId, param]);
+    }), [projectId, param, debounceName]);
 };
 
 export const useTaskModal = () => {
