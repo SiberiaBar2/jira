@@ -1,5 +1,4 @@
 import { Button, Form, Input, Modal } from "antd";
-import { useForm } from "antd/es/form/Form";
 import { TaskTypeSelect } from "components/task-types-select";
 import { UseSelect } from "components/use-select";
 import { useEffect } from "react";
@@ -16,7 +15,7 @@ export const TaskModal = () => {
         wrapperCol: {span: 16},// 右边的表单
     };
 
-    const [form] = useForm(); 
+    const [form] = Form.useForm(); 
     const onCancel = () => {
         form.resetFields();
         close();

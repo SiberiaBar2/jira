@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Button, Drawer, Form, Input, Spin } from "antd";
-import { useForm } from "antd/es/form/Form";
 import { ErrorBox } from "components/lib";
 import { UseSelect } from "components/use-select";
 import { useAddProject, useEditProject } from "logichooks/useEditProject";
@@ -12,7 +11,7 @@ const ProjectsModal = () => {
     const useMutataProject = editingProject ? useEditProject : useAddProject; 
     const {mutateAsync, isLoading: mutateLoading, error, } = useMutataProject(useProjectsQueryKey());
     
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const onFinish = (values: any) => {
         mutateAsync({...editingProject, ...values}).then(() => {
             form.resetFields();

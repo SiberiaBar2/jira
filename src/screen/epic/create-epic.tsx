@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Button, Drawer, DrawerProps, Form, Input, Spin } from "antd"
-import { useForm } from "antd/es/form/Form";
 import { ErrorBox } from "components/lib";
 import { useEffect } from "react";
 import { useProjectIdUrl } from "screen/kanban/utils";
@@ -8,7 +7,7 @@ import { useEpicsQueryKey } from "./config";
 import { useAddEpics } from "./utils"; 
 
 export const CreateEpic = (props: Pick<DrawerProps, 'open'> & {onClose: () => void}) => {
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const {mutate: addEpic, isLoading, error} = useAddEpics(useEpicsQueryKey());
     const projectId = useProjectIdUrl();
 
